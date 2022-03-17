@@ -1,15 +1,21 @@
 const express = require('express');
 const app = express();
 
+//register ejs as the view engine
+app.set('view engine', 'ejs');
+
 //listen for request on port 3000
 app.listen(3000);
 
+//static files
+app.use(express.static('public'));
+
 //Main page
 app.get('/', (req, res) => {
-    res.sendFile('./views/index.html', { root: __dirname } );
+    res.render('index');
 });
 
 //404
 app.use((req,res) => {
-    res.sendFile('./views/404.html', { root: __dirname });
+    res.render('404');
 });
