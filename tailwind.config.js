@@ -1,7 +1,12 @@
 module.exports = {
+  mode: "jit",
   content: ["./views/**/*.ejs"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'banner': "url('/img/banner.jpg')"
+      }
+    },
   },
   plugins: [],
 }

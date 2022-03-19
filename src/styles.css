@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card{
+@apply bg-white col-span-1 m-10 p-5 max-w-xl cursor-pointer shadow-gray-600 shadow-lg rounded-lg hover:shadow-gray-600 hover:shadow-2xl hover:-translate-y-1 hover:translate-x-1
+}
+
+.navli{
+@apply flex-grow hover:bg-gray-400 hover:underline hover:font-semibold transition duration-200 ease-out
+}

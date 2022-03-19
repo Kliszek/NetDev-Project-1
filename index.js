@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/kupa', (req, res) => {
+    res.send('KUPA KUPA');
+})
+
 //404
 app.use((req,res) => {
     res.render('404');
