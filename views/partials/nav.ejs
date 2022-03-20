@@ -1,0 +1,24 @@
+<nav class="block bg-gray-700 text-white sticky top-0">
+    <ul class="text-xl flex justify-evenly text-center">
+        <li class="navli">
+            <a class="inline-block h-full w-full p-4 <% if(page=="home") { %>pb-2 border-b-8 border-green-700 <% } %>" href="/">
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="navli">
+            <a class="inline-block h-full w-full p-4  <% if(page=="about") { %>pb-2 border-b-8 border-green-700 <% } %>" href="#">
+                <span>About</span>
+            </a>
+        </li>
+        <li class="navli">
+            <a class="inline-block h-full w-full p-4  <% if(page=="contact") { %>pb-2 border-b-8 border-green-700 <% } %>" href="#">
+                <span>Contact</span>
+            </a>
+        </li>
+        <li class="navli">
+            <a class="inline-block h-full w-full p-4  <% if(page=="add") { %>pb-2 border-b-8 border-green-700 <% } %>" href="#">
+                <span>Add photos</span>
+            </a>
+        </li>
+    </ul>
+</nav>

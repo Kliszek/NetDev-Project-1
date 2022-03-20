@@ -1,46 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>WebDev Project 1</title>
-</head>
+
+<%- include('./partials/head.ejs') %> 
+
 <body class="bg-slate-50">
 
-    <div id="wrapper">
-        <header class="bg-slate-100 h-50">
-            <div class="text-center bg-banner bg-cover bg-no-repeat bg-center">
-                <h1 class="text-gray-700 text-5xl uppercase text-center p-4 mb-4 inline-block border-b-4 border-green-700 tracking-widest">Kliszek <br> photo browser</h1>
-                <!-- <img class="opacity-40 absolute max-h-60 top-0 left-0 overflow-hidden" src="img/banner.jpg" alt="banner"> -->
-            </div>
-        </header>
-
-        <nav class="block bg-gray-700 text-white sticky top-0">
-            <ul class="text-xl flex justify-evenly text-center">
-                <li class="navli">
-                    <a class="inline-block h-full w-full p-4 pb-2 border-b-8 border-green-700" href="#">
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li class="navli">
-                    <a class="inline-block h-full w-full p-4" href="#">
-                        <span>About</span>
-                    </a>
-                </li>
-                <li class="navli">
-                    <a class="inline-block h-full w-full p-4" href="#">
-                        <span>Contact</span>
-                    </a>
-                </li>
-                <li class="navli">
-                    <a class="inline-block h-full w-full p-4" href="#">
-                        <span>Add photos</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+    <div class="relative min-h-screen pb-20" id="wrapper">
+        
+        <%- include('./partials/header.ejs') %>
+        <%- include('./partials/nav.ejs') %>
 
         <main>
             <h1 class="font-semibold inline-block tracking-wider p-5 mt-10 ml-20 text-4xl border-b-2 border-slate-200">Recent  photos:</h1>
@@ -63,15 +31,8 @@
             </div>
         </main>
 
-        <footer>
-
-            <div class="p-4 mt-6 text-center border-t-2 border-slate-700 bg-white text-lg text-slate-500 font-mono underline">
-                Jakub Kliszko, WebDev Project 1
-            </div>
-
-        </footer>
+        <%- include('./partials/footer.ejs') %>
     </div>
-
 
 </body>
 </html>

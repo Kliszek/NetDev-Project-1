@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 //Main page
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {page: "home"});
 });
 
 app.get('/kupa', (req, res) => {
@@ -21,5 +21,5 @@ app.get('/kupa', (req, res) => {
 
 //404
 app.use((req,res) => {
-    res.render('404');
+    res.render('404', {page:""});
 });

@@ -1,12 +1,22 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Did not found it, sorry</title>
-</head>
-<body>
-    <h1>Yo, you've got a 404 there, mate</h1>
-    <h2>sorry</h2>
+
+<%- include('./partials/head.ejs') %> 
+
+<body class="bg-slate-50">
+
+    <div class="relative min-h-screen pb-20" id="wrapper">
+        
+        <%- include('./partials/header.ejs') %>
+        <%- include('./partials/nav.ejs') %>
+
+        <div class="m-20 pb-8 border-l-8 border-green-600">
+            <h1 class="font-semibold inline-block tracking-wider p-5 ml-8 mb-10 text-5xl border-b-2 border-slate-200">404 error</h1>
+            <h3 class="ml-5 text-xl">Sorry, this page was not found.</h3>
+        </div>
+
+        <%- include('./partials/footer.ejs') %>
+    </div>
+
 </body>
 </html>
