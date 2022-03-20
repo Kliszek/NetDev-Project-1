@@ -5,6 +5,10 @@ module.exports = {
     extend: {
       backgroundImage: {
         'banner': "url('/img/banner.jpg')"
+      },
+      fontFamily: {
+        'rubik': ['Rubik'],
+        'josefin': ['Josefin Sans']
       }
     },
   },
