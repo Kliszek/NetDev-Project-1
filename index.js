@@ -25,7 +25,11 @@ app.get('/contact', (req, res) => {
 
 app.get('/kupa', (req, res) => {
     res.send('KUPA KUPA');
-})
+});
+
+app.get('/photo/add', (req, res) => {
+    res.render('add', {page: "add"});
+});
 
 //404
 app.use((req,res) => {

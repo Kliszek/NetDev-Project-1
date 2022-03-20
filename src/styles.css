@@ -11,3 +11,7 @@
 .navli{
 @apply flex-grow pt-1 hover:bg-gray-400 hover:underline hover:font-semibold transition duration-200 ease-out
 }
+
+.form-label{
+@apply inline-block p-3 col-span-1
+}
