@@ -15,6 +15,14 @@ app.get('/', (req, res) => {
     res.render('index', {page: "home"});
 });
 
+app.get('/about', (req, res) => {
+    res.render('about', {page: "about"})
+});
+
+app.get('/contact', (req, res) => {
+    res.render('contact', {page: "contact"})
+});
+
 app.get('/kupa', (req, res) => {
     res.send('KUPA KUPA');
 })

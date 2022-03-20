@@ -1,11 +1,22 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-</head>
-<body>
-    
+
+<%- include('./partials/head.ejs') %> 
+
+<body class="bg-slate-50">
+
+    <div class="relative min-h-screen pb-20" id="wrapper">
+        
+        <%- include('./partials/header.ejs') %>
+        <%- include('./partials/nav.ejs') %>
+
+        <div class="m-20 pb-8 border-l-8 border-green-600">
+            <h1 class="font-semibold inline-block tracking-wider p-5 ml-8 mb-10 text-5xl border-b-2 border-slate-200">About</h1>
+            <p class="mx-20 text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ullam iusto aperiam laboriosam id commodi at repellendus, quae totam delectus veritatis voluptate, quia dolorem eius ipsam necessitatibus optio exercitationem officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae eveniet illum enim veniam laudantium nihil laborum amet repellendus soluta neque minus magni, cum voluptatum ratione nam ipsum in voluptate quam.</p>
+        </div>
+
+        <%- include('./partials/footer.ejs') %>
+    </div>
+
 </body>
 </html>
