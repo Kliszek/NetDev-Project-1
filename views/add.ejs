@@ -16,19 +16,19 @@
         </div>
 
         <div class="text-center">
-            <form class="" action="">
+            <form class="" action="/photo" method="POST">
                 <h4 class="inline-block text-xl p-4 mb-8 border-b-2 border-green-700">Submit this form to add a new photo:</h4><br>
                 <div class="inline-grid gap-3 grid-cols-2 md:grid-cols-3 text-left w-1/2 lg:w-1/3">
                     <label class="form-label" for="photo-title">Title:</label>
-                    <input class="col-span-2 p-3" id="photo-title" name="photo-title" type="text" required placeholder="Enter the photo title...">
+                    <input class="col-span-2 p-3" id="photo-title" name="title" type="text" required placeholder="Enter the photo title...">
                     <label class="form-label" for="photo-uri">Photo URI:</label>
-                    <input class="col-span-2 p-3"  id="photo-uri" name="photo-uri" type="url" required placeholder="Enter the URI of the photo...">
+                    <input class="col-span-2 p-3"  id="photo-uri" name="uri" type="url" required placeholder="Enter the URI of the photo...">
                     <label class="form-label" for="photo-desc">Photo description:</label>
-                    <textarea class="col-span-2 overflow-hidden p-3" name="photo-desc" id="photo-desc" cols="30" rows="5"  placeholder="Enter the photo description..."></textarea>
+                    <textarea class="col-span-2 overflow-hidden p-3" name="description" id="photo-desc" cols="30" rows="5"  placeholder="Enter the photo description..."></textarea>
                     <label class="form-label" for="photo-author">Author:</label>
-                    <input class="col-span-2 p-3"  id="photo-author" name="photo-author" type="text" placeholder="Enter the author's name...">
+                    <input class="col-span-2 p-3"  id="photo-author" name="author" type="text" placeholder="Enter the author's name...">
                     <label class="form-label" for="photo-date">Date:</label>
-                    <input class="col-span-2 p-3"  id="photo-date" name="photo-date" type="date" placeholder="Enter the photo date..."><br>
+                    <input class="col-span-2 p-3"  id="photo-date" name="date" type="date" placeholder="Enter the photo date..."><br>
                     <input class="mt-3 p-3 cursor-pointer rounded-lg hover:-translate-y-0.5 bg-slate-600 text-white hover:bg-green-700 transition duration-100 ease-out" type="submit" value="Submit">
                 </div>
             </form>
