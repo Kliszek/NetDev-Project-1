@@ -29,11 +29,11 @@
                     <% if(photoList.length > 0) { %>
                         <% photoList.forEach(photo => { %>
                             
-                            <div class="card">
-                                <img class="mx-auto max-h-3/4 mb-6" src="<%= photo.uri %>" alt="stock photo">
+                            <a href="/photo/<%= photo.id %>" class="card">
+                                <img class="rounded mx-auto max-h-3/4 mb-6" src="<%= photo.uri %>" alt="stock photo">
                                 <h6 class="text-lg"><%= photo.title %></h6>
                                 <p><%= photo.description %></p>
-                            </div>
+                            </a>
 
                         <% }); %>
                     <% } else { %>

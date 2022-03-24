@@ -45,23 +45,18 @@ app.get('/kupa', (req, res) => {
 
 app.get('/photo/add', (req, res) => {
     res.render('add', {page: "add"});
-    // const testPhoto = new Photo({
-    //     title: 'aaatytul',
-    //     uri: 'jakis adres',
-    //     description: 'costam',
-    //     sdfaf: 'fsdfsa',
-    //     author: 'sad',
-    //     date: Date.now()
-    // });
-
-    // testPhoto.save()
-    //     .then((result) => {
-    //         //do something
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     })
 });
+
+app.get('/photo/:id', (req, res) => {
+    const id = req.params.id;
+    Photo.findById(id)
+        .then((result) => {
+            res.render('details', {page: "", photo: result});
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
 
 app.post('/photo', (req, res) => {
     console.log(req.body);
@@ -78,5 +73,5 @@ app.post('/photo', (req, res) => {
 
 //404
 app.use((req, res) => {
-    res.render('404', {page:""});
+    res.render('404', {page: ""});
 });

@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .card{
-@apply bg-white font-josefin col-span-1 m-10 p-5 max-w-xl cursor-pointer shadow-gray-600 shadow-lg rounded-lg hover:shadow-gray-600 hover:shadow-2xl hover:-translate-y-1 hover:translate-x-1 border-l-8 hover:border-orange-600 transition duration-100 overflow-hidden
+@apply inline-block bg-white font-josefin col-span-1 m-10 p-5 max-w-xl cursor-pointer shadow-gray-600 shadow-lg rounded-lg hover:shadow-gray-600 hover:shadow-2xl hover:-translate-y-1 hover:translate-x-1 border-l-8 hover:border-orange-600 transition duration-100 overflow-hidden
 }
 
 .navli{

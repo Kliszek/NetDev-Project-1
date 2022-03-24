@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %> 
+
+<body class="bg-slate-50">
+
+    <div class="relative min-h-screen pb-20" id="wrapper">
+        
+        <%- include('./partials/header.ejs') %>
+        <%- include('./partials/nav.ejs') %>
+
+        <div class="m-20 pb-8 border-l-8 border-green-600">
+            <h1 class="font-semibold inline-block tracking-wider p-5 ml-8 mb-10 text-5xl border-b-2 border-slate-200"><%= photo.title %></h1>
+            
+            <div class="mx-10 p-10 bg-white rounded-xl max-w-4xl shadow-gray-600 shadow-lg">
+                <img class="rounded mb-10" src="<%= photo.uri %>" alt="happy developer">
+                <p class="font-josefin border-l-8 border-orange-600 text-lg px-3 text-justify first-letter:text-3xl"><%= photo.description %></p>
+                <div class="flex justify-between">
+                    <span class="font-rubik font-light inline-block mt-10">Author: <% if(photo.author != "") { %> <%= photo.author %> <% } else { %> <i>unknown</i> <% } %> </span>
+                    <span class="font-rubik font-light inline-block mt-10">Date: <% if(photo.date != null) { %> <%= photo.date.toUTCString() %> <% } else { %> <i>unknown</i> <% } %> </span>
+                </div>
+            </div>
+
+            <p class="text-sm mt-8 ml-20 font-rubik italic">Created at: <span class="inline-block ml-10"><%= photo.createdAt.toUTCString() %></span></p>
+            <p class="text-sm ml-20 font-rubik italic">Updated at: <span class="inline-block ml-10"><%= photo.updatedAt.toUTCString() %></span></p>
+        </div>
+
+        <%- include('./partials/footer.ejs') %>
+    </div>
+
+</body>
+</html>
