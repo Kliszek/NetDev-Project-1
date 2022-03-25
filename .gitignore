@@ -16,3 +16,6 @@ layout.psd
 
 #Color palettes I'm not using anymore
 palette.*
+
+#A shortcut batch file for starting the server
+run_server.bat
