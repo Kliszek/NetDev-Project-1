@@ -21,7 +21,24 @@
 }
 
 .navli{
-@apply flex-grow pt-1 hover:bg-gray-400 hover:underline hover:font-semibold transition duration-200 ease-out
+@apply flex-grow pt-1 hover:bg-gray-400 transition duration-200 ease-out
+}
+
+.navli:hover span{
+visibility:hidden;
+}
+
+.navli:hover span::after{
+    visibility: visible;
+    position: absolute;
+    top:0;
+    left:0;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration:underline;
+    content: attr(data-text);
+    text-transform: capitalize;
+    transition-duration: 200ms;
 }
 
 .form-label{
