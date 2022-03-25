@@ -14,13 +14,13 @@
             <!-- <div class="ml-20 mt-20 pb-8 border-l-8 border-green-600">
                 <h1 class="font-semibold inline-block tracking-wider p-5 ml-8 text-5xl border-b-2 border-slate-200">Recent photos:</h1>
             </div> -->
-            <div class="m-20 pb-8 border-l-8 border-green-600">
+            <div class="md:m-20 pb-8 border-l-8 border-green-600">
                 <h1 class="font-semibold inline-block tracking-wider p-5 ml-8 mb-10 text-5xl border-b-2 border-slate-200">Browse photos:</h1>
                 <div class="bg-slate-100 p-5 rounded-tr-xl text-center border-r-4 border-slate-300">
                     <h1 class="font-rubik font-light inline-block tracking-wider md:px-20 text-2xl border-b-2 border-slate-200">Most Recent:</h1>
                 </div>
                 <hr>
-                <div class="bg-blue-50 pl-2 border-r-4 border-slate-300 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-blue-50 pl-2 border-r-4 border-slate-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
                     <% if(photoList == null) { %>
                         <h1 class="m-20 text-3xl">Connection to the database could not be established</h1>
@@ -30,9 +30,9 @@
                         <% photoList.forEach(photo => { %>
                             
                             <a href="/photo/<%= photo.id %>" class="card">
-                                <img class="rounded mx-auto object-cover object-center w-full max-h-65pr mb-6" src="<%= photo.uri %>" alt="the photo">
+                                <img class="rounded mx-auto object-cover object-center w-full max-h-64pr mb-6" src="<%= photo.uri %>" alt="the photo">
                                 <hr>
-                                <h6 class="font-semibold my-5 text-lg"><%= photo.title %></h6>
+                                <h6 class="font-semibold my-5 text-lg overflow-ellipsis overflow-hidden"><%= photo.title %></h6>
                                 <p class="overflow-hidden overflow-ellipsis text-justify"><%= photo.description %></p>
                             </a>
 
@@ -40,7 +40,7 @@
                     <% } else { %>
                         <h1 class="m-20 text-3xl">There are no photos to display</h1>
                     <% } %>
-                    
+
                 </div>
             </div>
             

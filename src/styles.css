@@ -4,8 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.max-h-65pr{
-    max-height: 64%
+.max-h-64pr{
+    max-height: 64%;
+}
+
+.gap-1\/5{
+    gap: 20%;
 }
 
 .card{
@@ -21,5 +25,5 @@
 }
 
 .form-label{
-@apply inline-block p-3 col-span-1
+@apply inline-block p-3 col-span-2 md:col-span-1 text-center md:text-left
 }

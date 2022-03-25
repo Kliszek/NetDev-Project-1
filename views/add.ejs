@@ -10,7 +10,7 @@
         <%- include('./partials/header.ejs') %>
         <%- include('./partials/nav.ejs') %>
 
-        <div class="m-20 mb-5 pb-8 border-l-8 border-green-600">
+        <div class="md:m-20 mb-5 pb-8 border-l-8 border-green-600">
             <h1 class="font-semibold inline-block tracking-wider p-5 ml-8 mb-10 text-5xl border-b-2 border-slate-200">Submit a new photo:</h1>
             <!-- <h3 class="ml-20 text-xl">WIP</h3> -->
         </div>
@@ -29,7 +29,7 @@
                     <input class="col-span-2 p-3"  id="photo-author" name="author" type="text" placeholder="Enter the author's name...">
                     <label class="form-label" for="photo-date">Date:</label>
                     <input class="col-span-2 p-3"  id="photo-date" name="date" type="date" placeholder="Enter the photo date..."><br>
-                    <input class="mt-3 p-3 cursor-pointer rounded-lg hover:-translate-y-0.5 bg-slate-600 text-white hover:bg-green-700 transition duration-100 ease-out" type="submit" value="Submit">
+                    <input class="mt-3 p-3 cursor-pointer rounded-lg hover:-translate-y-0.5 bg-slate-600 text-white hover:bg-green-700 transition duration-100 ease-out col-span-2 md:col-span-1" type="submit" value="Submit">
                 </div>
             </form>
         </div>
