@@ -30,9 +30,10 @@
                         <% photoList.forEach(photo => { %>
                             
                             <a href="/photo/<%= photo.id %>" class="card">
-                                <img class="rounded mx-auto max-h-3/4 mb-6" src="<%= photo.uri %>" alt="stock photo">
-                                <h6 class="text-lg"><%= photo.title %></h6>
-                                <p><%= photo.description %></p>
+                                <img class="rounded mx-auto object-cover object-center w-full max-h-65pr mb-6" src="<%= photo.uri %>" alt="the photo">
+                                <hr>
+                                <h6 class="font-semibold my-5 text-lg"><%= photo.title %></h6>
+                                <p class="overflow-hidden overflow-ellipsis text-justify"><%= photo.description %></p>
                             </a>
 
                         <% }); %>
