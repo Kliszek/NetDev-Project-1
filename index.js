@@ -19,8 +19,12 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-//Main page
 app.get('/', (req, res) => {
+    res.redirect('/recent');
+})
+
+//Main page
+app.get('/recent', (req, res) => {
     Photo.find().sort({ createdAt: -1 })
         .then((result) => {
             res.render('index', {page: "home", photoList: result});
