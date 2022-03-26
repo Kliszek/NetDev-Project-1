@@ -18,7 +18,7 @@
                 <div class="flex-grow mx-10 p-10 bg-white rounded-xl max-w-4xl shadow-gray-600 shadow-lg">
                     <img class="rounded mb-10 mx-auto" onerror="this.src='/img/not-found.jpg';" src="<%= photo.uri %>" alt="the photo">
                     <hr>
-                    <p class="mt-7 font-josefin border-l-8 border-orange-600 text-lg px-3 text-justify first-letter:text-3xl"><%= photo.description %></p>
+                    <p class="mt-7 font-josefin border-l-8 border-orange-600 text-lg px-3 text-justify first-letter:text-3xl whitespace-pre"><%= photo.description %></p>
                     <div class="flex flex-wrap text-center justify-between gap-1/5">
                         <span class="font-rubik font-light inline-block mx-auto mt-10">Author: <% if(photo.author != "") { %> <%= photo.author %> <% } else { %> <i>unknown</i> <% } %> </span>
                         <span class="font-rubik font-light inline-block mx-auto mt-10">Date: <% if(photo.date != null) { %> <%= photo.date.toUTCString() %> <% } else { %> <i>unknown</i> <% } %> </span>
