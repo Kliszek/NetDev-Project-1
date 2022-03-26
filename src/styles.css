@@ -44,3 +44,12 @@ visibility:hidden;
 .form-label{
 @apply inline-block p-3 col-span-2 md:col-span-1 text-center md:text-left
 }
+
+.tool-button{
+@apply cursor-pointer rounded-full p-2 w-14 h-14 lg:w-20 lg:h-20 lg:p-3 bg-slate-500 shadow-gray-600 shadow-lg hover:-translate-y-1 transition duration-100
+}
+
+.tool-button:hover > svg{
+    color: white;
+    transition-duration: 100ms;
+}

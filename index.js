@@ -39,10 +39,6 @@ app.get('/contact', (req, res) => {
     res.render('contact', {page: "contact"})
 });
 
-app.get('/kupa', (req, res) => {
-    res.send('KUPA KUPA');
-});
-
 app.get('/photo/add', (req, res) => {
     res.render('add', {page: "add"});
 });
@@ -52,6 +48,22 @@ app.get('/photo/:id', (req, res) => {
     Photo.findById(id)
         .then((result) => {
             res.render('details', {page: "", photo: result});
+        })
+        .catch((err) => {
+            if(req.headers['sec-fetch-dest'] == 'image')
+            {
+                console.log("ERROR: There was a GET request for an image from the server");
+            }
+
+            res.status(404).render('404', {page: ""});
+        })
+})
+
+app.delete('/photo/:id', (req, res) => {
+    const id = req.params.id;
+    Photo.findByIdAndDelete(id)
+        .then((result) => {
+            res.json({ redirect: '/' });
         })
         .catch((err) => {
             console.log(err);
@@ -73,5 +85,5 @@ app.post('/photo', (req, res) => {
 
 //404
 app.use((req, res) => {
-    res.render('404', {page: ""});
+    res.status(404).render('404', {page: ""});
 });

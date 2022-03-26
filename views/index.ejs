@@ -30,7 +30,7 @@
                         <% photoList.forEach(photo => { %>
                             
                             <a href="/photo/<%= photo.id %>" class="card">
-                                <img class="rounded mx-auto object-cover object-center w-full max-h-64pr mb-6" src="<%= photo.uri %>" alt="the photo">
+                                <img class="rounded mx-auto object-cover object-center w-full max-h-64pr mb-6" onerror="this.src='/img/not-found.jpg'; this.style.width='40%'" src="<%= photo.uri %>" alt="the photo">
                                 <hr>
                                 <h6 class="font-semibold my-5 text-lg overflow-ellipsis overflow-hidden"><%= photo.title %></h6>
                                 <p class="overflow-hidden overflow-ellipsis text-justify"><%= photo.description %></p>
