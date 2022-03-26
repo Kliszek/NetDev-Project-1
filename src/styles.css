@@ -53,3 +53,8 @@ visibility:hidden;
     color: white;
     transition-duration: 200ms;
 }
+
+@keyframes slidein{
+    from{ transform: translate(-50%, -80%); opacity: 0%; }
+    to{ transform: translate(-50%, -50%); opacity: 100%;}
+}

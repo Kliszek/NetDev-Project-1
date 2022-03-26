@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         'rubik': ['Rubik'],
         'josefin': ['Josefin Sans']
+      },
+      animation: {
+        'slidein': 'slidein 0.25s ease forwards'
       }
     },
   },
