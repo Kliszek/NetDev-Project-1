@@ -61,8 +61,10 @@ app.get('/photo/:id', (req, res) => {
 
 app.delete('/photo/:id', (req, res) => {
     const id = req.params.id;
+    console.log("Removing a photo from the database...");
     Photo.findByIdAndDelete(id)
         .then((result) => {
+            console.log(result);
             res.json({ redirect: '/' });
         })
         .catch((err) => {
@@ -70,7 +72,12 @@ app.delete('/photo/:id', (req, res) => {
         })
 })
 
+app.get('/photo/edit/:id', (req, res) => {
+    res.send(req.params.id);
+})
+
 app.post('/photo', (req, res) => {
+    console.log("Adding a new photo to the database...");
     console.log(req.body);
     const newPhoto = new Photo(req.body);
 
