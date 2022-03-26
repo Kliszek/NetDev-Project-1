@@ -72,12 +72,42 @@ app.delete('/photo/:id', (req, res) => {
             res.json({ redirect: '/' });
         })
         .catch((err) => {
+            console.log("ERROR:\n\n");
             console.log(err);
         })
 })
 
-app.get('/photo/edit/:id', (req, res) => {
-    res.send(req.params.id);
+app.put('/photo/:id', (req, res) => {
+    const id = req.params.id;
+
+    console.log("Updating a photo...");
+    console.log(req.body);
+    
+    Photo.findByIdAndUpdate(id, req.body)
+        .then((result) => {
+            console.log("Photo updated:");
+            console.log(result);
+            res.json({ redirect: `/photo/${id}` });
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
+
+app.get('/photo/:id/editOld', (req, res) => {
+    const id = req.params.id;
+    Photo.findById(id)
+        .then((result) => {
+            res.render('edit', {page: "", photo: result});
+        })
+        .catch((err) => {
+            if(req.headers['sec-fetch-dest'] == 'image')
+            {
+                console.log("ERROR: There was a GET request for an image from the server");
+            }
+
+            res.status(404).render('404', {page: ""});
+        })
 })
 
 app.post('/photo', (req, res) => {

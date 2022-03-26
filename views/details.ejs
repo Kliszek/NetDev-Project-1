@@ -32,8 +32,8 @@
                     <div id="editButton" class="tool-button" >
                         <svg class="" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </div>
-                    <div class="tool-button hover:stroke-red-900 fill-red-700">
-                        <svg class="" fill="" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    <div class="tool-button <!--hover:stroke-red-900 fill-red-700-->">
+                        <svg class="" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                     </div>
                 </div>
 
@@ -65,7 +65,7 @@
     <div id="editWindow" class="hidden transition duration-100">
         <div class="fixed top-0 left-0 w-full h-full bg-slate-600 opacity-50 z-10"> 
         </div>
-        <form class="overflow-y-auto max-h-screen rounded-lg z-20 w-11/12 sm:w-5/6 md:w-3/4 xl:w-1/2 h-min text-center shadow-lg shadow-gray-600 fixed inset-y-1/2 inset-x-1/2 bottom-auto bg-slate-100 -translate-x-1/2 -translate-y-1/2 animate-slidein">
+        <form data-photoid="<%= photo._id %>" class="overflow-y-auto max-h-screen rounded-lg z-20 w-11/12 sm:w-5/6 md:w-3/4 xl:w-1/2 h-min text-center shadow-lg shadow-gray-600 fixed inset-y-1/2 inset-x-1/2 bottom-auto bg-slate-100 -translate-x-1/2 -translate-y-1/2 animate-slidein">
             <h3 class="inline-block px-10 text-2xl font-josefin m-4 border-b-2 border-slate-200">Edit the photo:</h3>
             <!-- <svg class="w-6 h-6 mx-auto mt-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> -->
             <div class="px-5 grid md:grid-cols-2 gap-1 text-sm md:text-base">
@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-start-1 col-end-2 row-start-4 row-end-5">
                     <h5 class="block text-black font-josefin text-lg mt-2 py-2 px-5">Specify another date:</h5>
-                    <input id="test" class="p-3 text-center" type="date" name="date" value="<%= photo.date.toISOString().split('T')[0] %>">
+                    <input id="test" class="p-3 text-center" type="date" name="date" value="<% if(photo.date) { %><%= photo.date.toISOString().split('T')[0] %><% } %>">
                 </div>
                 <div class="flex flex-col md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-5">
                     <h5 class="inline-block text-black font-josefin text-lg mt-2 py-2 px-5">Enter a new description:</h5>
@@ -118,6 +118,7 @@
 
         deleteYes.addEventListener('click', (e) => {
             trashcanButton.removeEventListener('click', displayDeleteWindow);
+            editButton.removeEventListener('click', displayEditWindow);
             const endpoint = `/photo/${deleteYes.dataset.photoid}`;
             fetch(endpoint, {
                 method:'DELETE'
@@ -145,9 +146,7 @@
         const editWindow = document.querySelector('#editWindow');
         const editForm = editWindow.querySelector('form');
 
-        editButton.addEventListener('click', (e) => {
-           editWindow.classList.remove('hidden'); 
-        });
+        editButton.addEventListener('click', displayEditWindow);
 
         editForm.querySelector('#cancelEdit').addEventListener('click', (e) => {
             editWindow.classList.add('hidden');
@@ -156,13 +155,34 @@
         
         editForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            console.log(e);
-            var data = new FormData(editForm);
-            photoData[currentEdit] = data.get(currentEdit);
-            editForm.querySelector(`#${currentEdit}Form`).classList.add('hidden');
+            console.log(new FormData(editForm));
+            trashcanButton.removeEventListener('click', displayDeleteWindow);
+            editButton.removeEventListener('click', displayEditWindow);
             editWindow.classList.add('hidden');
-            updatePhotoView();
+
+            const formData = new FormData(editForm);
+
+            const endpoint = `/photo/${editForm.dataset.photoid}`;
+            fetch(endpoint, {
+                method: 'PUT',
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                body: new URLSearchParams(formData)
+            })
+            .then((response) => {
+                response.json()
+                .then((data) => {
+                    console.log(data);
+                    window.location.href = data.redirect;
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+            })
         });
+
+        function displayEditWindow(e) {
+            editWindow.classList.remove('hidden');
+        }
     </script>
 
 </body>

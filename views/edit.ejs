@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %> 
+
+<body class="bg-slate-50">
+
+    <div class="relative min-h-screen pb-20" id="wrapper">
+        
+        <%- include('./partials/header.ejs') %>
+        <%- include('./partials/nav.ejs') %>
+
+        <div class="md:m-20 mb-5 pb-8 border-l-8 border-green-600">
+            <h1 class="font-semibold inline-block tracking-wider p-5 ml-8 mb-10 text-5xl border-b-2 border-slate-200">Edit a photo:</h1>
+            <!-- <h3 class="ml-20 text-xl">WIP</h3> -->
+        </div>
+
+        <div class="text-center">
+            <div class="inline-block text-left">
+
+                <div edit="title" class=" rounded-lg cursor-pointer inline-block hover:text-slate-600 hover:-translate-y-1 transition duration-100">
+                    <h1 id="titleEdit" class=" font-semibold inline-block tracking-wider p-5 ml-8 mb-10 text-5xl border-b-2 border-slate-200"><%= photo.title %></h1>
+                </div>
+                
+            
+
+
+                <div class="mx-auto p-10 bg-white rounded-xl max-w-4xl shadow-gray-600 shadow-lg">
+                    <div class="text-center mb-5">
+                        <div edit="uri" class=" text-center cursor-pointer p-5 inline-block hover:-translate-y-1 transition duration-100">
+                            <img id="uriEdit" class="rounded mx-auto max-h-40" onerror="this.src='/img/not-found.jpg';" src="<%= photo.uri %>" alt="the photo">
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div edit="description" class="cursor-pointer hover:-translate-y-1 transition duration-100">
+                        <p id="descriptionEdit" class="mt-7 font-josefin border-l-8 border-orange-600 text-lg px-3 text-justify first-letter:text-3xl"><%= photo.description %></p>
+                    </div>
+                    
+                    <div class="flex flex-wrap text-center justify-between gap-1/5">
+                        <div edit="author">
+                            <span id="authorEdit" class="font-rubik font-light inline-block mx-auto mt-10">Author: <% if(photo.author != "") { %> <%= photo.author %> <% } else { %> <i>unknown</i> <% } %> </span>
+                        </div>
+                        
+                        <div edit="date">
+                            <span id="dateEdit" class="font-rubik font-light inline-block mx-auto mt-10">Date: <% if(photo.date != null) { %> <%= photo.date.toUTCString() %> <% } else { %> <i>unknown</i> <% } %> </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <p class="text-sm mt-8 ml-20 font-rubik italic">Created at: <span class="inline-block ml-10"><%= photo.createdAt.toUTCString() %></span></p>
+                <p class="text-sm ml-20 font-rubik italic">Updated at: <span class="inline-block ml-10"><%= photo.updatedAt.toUTCString() %></span></p>
+        
+            </div>
+            
+        </div>
+
+        <%- include('./partials/footer.ejs') %>
+    </div>
+
+    <div id="editWindow" class="hidden transition duration-100">
+        <div class="fixed top-0 left-0 w-full h-full bg-slate-600 opacity-50 z-10"> 
+        </div>
+        <form class="rounded-lg z-20 w-1/4 h-min text-center shadow-lg shadow-gray-600 fixed inset-y-1/2 inset-x-1/2 bottom-auto bg-slate-100 -translate-x-1/2 -translate-y-1/2 animate-slidein">
+            <!-- <svg class="w-6 h-6 mx-auto mt-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> -->
+            <div id="titleForm" class="hidden">
+                <h5 class="inline-block text-black font-josefin text-lg mt-2 py-2 px-5">Enter a new title:</h5>
+                <input class="p-3" placeholder="New title..." required type="text" name="title" value="<%= photo.title %>">
+            </div>
+            <div id="uriForm" class="hidden">
+                <h5 class="inline-block text-black font-josefin text-lg mt-2 py-2 px-5">Enter URI for a new photo:</h5>
+                <input class="p-3" placeholder="New photo URI..." required type="url" name="uri" value="<%= photo.uri %>">
+            </div>
+            <div id="descriptionForm" class="hidden">
+                <h5 class="inline-block text-black font-josefin text-lg mt-2 py-2 px-5">Enter a new description:</h5>
+                <textarea cols="30" rows="10" style="min-height: 50px" class="inline-block p-3" placeholder="New description..." required name="description"><%= photo.description %></textarea>
+            </div>
+            <div id="authorForm" class="hidden">
+                <h5 class="inline-block text-black font-josefin text-lg mt-2 py-2 px-5">Specify another author:</h5>
+                <input class="p-3" placeholder="Author's name..." type="text" name="author" value="<%= photo.author %>">
+            </div>
+            <div id="dateForm" class="hidden">
+                <h5 class="inline-block text-black font-josefin text-lg mt-2 py-2 px-5">Specify another date:</h5>
+                <input class="p-3" type="date" name="date">
+            </div>
+
+            <div class="flex justify-center gap-5">
+                <input class="mt-3 p-3 cursor-pointer rounded-lg hover:-translate-y-0.5 bg-slate-600 text-white hover:bg-green-700 transition duration-100 ease-out" type="submit" value="Okay">
+                <input id="cancelEdit" class="mt-3 p-3 cursor-pointer rounded-lg hover:-translate-y-0.5 bg-slate-600 text-white hover:bg-red-700 transition duration-100 ease-out" type="button" value="Cancel">
+            </div>
+
+
+            <div class="flex justify-around mb-5">
+                
+            </div>
+        </form> 
+    </div>
+
+    <script>
+        var photoData = {};
+        var currentEdit = '';
+
+        const editWindow = document.querySelector('#editWindow');
+        const editForm = editWindow.querySelector('form');
+
+        editForm.querySelector('#cancelEdit').addEventListener('click', (e) => {
+            editWindow.classList.add('hidden');
+            editForm.querySelector(`#${currentEdit}Form`).classList.add('hidden');
+        });
+        
+        editForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log(e);
+            var data = new FormData(editForm);
+            photoData[currentEdit] = data.get(currentEdit);
+            editForm.querySelector(`#${currentEdit}Form`).classList.add('hidden');
+            editWindow.classList.add('hidden');
+            updatePhotoView();
+        });
+
+        editForm.addEventListener('cancel', (e) => {
+            e.preventDefault();
+            console.log(e);
+        })
+
+        //const editTitle = document.querySelector('#editTitle');
+        const editableElements = document.querySelectorAll('[edit]');
+
+        editableElements.forEach(element => {
+            element.addEventListener('click', displayEditWindow);
+        });
+
+        //editTitle.addEventListener('click', displayEditWindow);
+
+
+        function displayEditWindow(e) {
+            currentEdit = e.currentTarget.getAttribute('edit')
+            editForm.querySelector(`#${currentEdit}Form`).classList.remove('hidden');
+            editWindow.classList.remove('hidden');
+        }
+
+        function updatePhotoView()
+        {
+            Object.entries(photoData).forEach((entry) => {
+                if(entry[0] != 'uri')
+                    document.querySelector(`#${entry[0]}Edit`).textContent = entry[1];
+                else
+                    document.querySelector(`#${entry[0]}Edit`).src = entry[1];
+            });
+        }
+
+    </script>
+
+</body>
+</html>
