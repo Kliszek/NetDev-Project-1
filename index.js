@@ -133,6 +133,7 @@ app.put('/photo/:id/edit', (req, res) => {
 
     console.log("Updating a photo...");
     console.log(req.body);
+    req.body.updatedAt = new Date();
     
     Photo.findByIdAndUpdate(id, req.body)
         .then((result) => {

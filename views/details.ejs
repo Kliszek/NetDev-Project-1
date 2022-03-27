@@ -21,7 +21,7 @@
                     <p class="mt-7 font-josefin border-l-8 border-orange-600 text-lg px-3 text-justify first-letter:text-3xl whitespace-pre-wrap"><%= photo.description %></p>
                     <div class="flex flex-wrap text-center justify-between gap-1/5">
                         <span class="font-rubik font-light inline-block mx-auto mt-10">Author: <% if(photo.author != "") { %> <%= photo.author %> <% } else { %> <i>unknown</i> <% } %> </span>
-                        <span class="font-rubik font-light inline-block mx-auto mt-10">Date: <% if(photo.date != null) { %> <%= photo.date.toUTCString() %> <% } else { %> <i>unknown</i> <% } %> </span>
+                        <span class="font-rubik font-light inline-block mx-auto mt-10">Date: <% if(photo.date != null) { %> <%= photo.date.toLocaleDateString("en-uk", {dateStyle:"medium"}) %> <% } else { %> <i>unknown</i> <% } %> </span>
                     </div>
                 </div>
     
@@ -42,8 +42,8 @@
 
 
 
-            <p class="text-sm mt-8 ml-20 font-rubik italic">Created at: <span class="inline-block ml-10"><%= photo.createdAt.toUTCString() %></span></p>
-            <p class="text-sm ml-20 font-rubik italic">Updated at: <span class="inline-block ml-10"><%= photo.updatedAt.toUTCString() %></span></p>
+            <p class="text-sm mt-8 ml-20 font-rubik italic">Created at: <span class="inline-block ml-10"><%= photo.createdAt.toLocaleString("en-uk", {dateStyle:"medium", timeStyle:"medium"}) %></span></p>
+            <p class="text-sm ml-20 font-rubik italic">Updated at: <span class="inline-block ml-10"><%= photo.updatedAt.toLocaleString("en-uk", {dateStyle:"medium", timeStyle:"medium"}) %></span></p>
         </div>
 
         <%- include('./partials/footer.ejs') %>
