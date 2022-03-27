@@ -22,6 +22,11 @@ const photoSchema = new Schema({
     date: {
         type: Date,
         required: false
+    },
+    favourite: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 
 }, { timestamps: true } );

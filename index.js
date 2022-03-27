@@ -22,6 +22,7 @@ app.set('view engine', 'ejs');
 //static files
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.redirect('/recent');
@@ -32,17 +33,36 @@ app.get('/recent', (req, res) => {
 
     if(mongoose.connection.readyState != 1){
         console.log("Displaying empty browse page, because connection with the database could not be estabilished!");
-        res.render('browse', {page: "home"});
+        res.render('browse', {page: "recent"});
         return;
     }
 
     Photo.find().sort({ createdAt: -1 })
     .then((result) => {
-        res.render('browse', {page: "home", photoList: result});
+        res.render('browse', {page: "recent", photoList: result});
     })
     .catch((err) => {
         console.log(err);
-        res.render('browse', {page: "home"});
+        res.render('browse', {page: "recent"});
+    })
+
+});
+
+app.get('/favourites', (req, res) => {
+
+    if(mongoose.connection.readyState != 1){
+        console.log("Displaying empty browse page, because connection with the database could not be estabilished!");
+        res.render('browse', {page: "favourites"});
+        return;
+    }
+
+    Photo.find({favourite: true}).sort({ createdAt: -1 })
+    .then((result) => {
+        res.render('browse', {page: "favourites", photoList: result});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.render('browse', {page: "favourites"});
     })
 
 });
@@ -102,7 +122,7 @@ app.delete('/photo/:id', (req, res) => {
         })
 })
 
-app.put('/photo/:id', (req, res) => {
+app.put('/photo/:id/edit', (req, res) => {
     const id = req.params.id;
 
     if(mongoose.connection.readyState != 1){
@@ -118,6 +138,29 @@ app.put('/photo/:id', (req, res) => {
         .then((result) => {
             console.log("Photo updated:");
             console.log(result);
+            res.json({ redirect: `/photo/${id}` });
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
+
+
+app.put('/photo/:id/favourite', (req, res) => {
+    const id = req.params.id;
+
+    if(mongoose.connection.readyState != 1){
+        console.log("ERROR: Cannot update the photo, because connection with the database could not be estabilished!");
+        res.json({ redirect: `/photo/${id}` });
+        return;
+    }
+
+    console.log("Updating a photo favourite state to:...");
+    console.log(req.body.state);
+
+    Photo.findByIdAndUpdate(id, { favourite: req.body.state })
+        .then((result) => {
+            console.log(`Photo favourite state updated: ${req.body.state}`);
             res.json({ redirect: `/photo/${id}` });
         })
         .catch((err) => {

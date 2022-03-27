@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.max-h-64pr{
-    max-height: 64%;
-}
-
 .gap-1\/5{
     gap: 20%;
 }
@@ -57,4 +53,12 @@ visibility:hidden;
 @keyframes slidein{
     from{ transform: translate(-50%, -80%); opacity: 0%; }
     to{ transform: translate(-50%, -50%); opacity: 100%;}
+}
+
+input, textarea, select{
+@apply rounded
+}
+
+div[data-state="true"] > svg{
+@apply fill-red-800
 }

@@ -16,8 +16,15 @@
             </div> -->
             <div class="md:m-20 pb-8 border-l-8 border-green-600">
                 <h1 class="font-semibold inline-block tracking-wider p-5 ml-8 mb-10 text-5xl border-b-2 border-slate-200">Browse photos:</h1>
-                <div class="bg-slate-100 p-5 rounded-tr-xl text-center border-r-4 border-slate-300">
-                    <h1 class="font-rubik font-light inline-block tracking-wider md:px-20 text-2xl border-b-2 border-slate-200">Most Recent:</h1>
+                <div class="relative bg-slate-100 p-5 rounded-tr-xl text-center border-r-4 border-slate-300">
+                    <h1 class=" font-rubik font-light inline-block tracking-wider md:px-20 text-2xl border-b-2 border-slate-200"><% if(page == "recent") {%> Most Recent: <%} else if(page == "favourites") {%> Favourites: <% } %></h1>
+                    <div class="text-sm block lg:absolute top-6 right-8">
+                        <label for="displaySelect">Display mode:</label>
+                        <select id="displaySelect">
+                            <option <% if(page == "recent") {%> selected <% } %> value="recent">Most Recent</option>
+                            <option <% if(page == "favourites") {%> selected <% } %> value="favourites">Favourites</option>
+                        </select>
+                    </div>
                 </div>
                 <hr>
                 <div class="bg-blue-50 pl-2 border-r-4 border-slate-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -47,6 +54,15 @@
         </main>
 
         <%- include('./partials/footer.ejs') %>
+
+        <script>
+            const displaySelect = document.querySelector('#displaySelect');
+
+            displaySelect.addEventListener('change', (e) => {
+                window.location.href = `/${e.currentTarget.value}`;
+            })
+
+        </script>
     </div>
 
 </body>
