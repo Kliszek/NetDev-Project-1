@@ -7,7 +7,11 @@ const Photo = require('./models/photo.js');
 const dbURI = 'mongodb+srv://kliszek:S7tvZp0CSZWPM9dB@webdev1.2a9fc.mongodb.net/WebDev1?retryWrites=true&w=majority';
 mongoose.connect(dbURI)
     .then((result) => app.listen(3000))
-    .catch((err) => console.log(err))
+    .catch((err) => {
+        console.log(err);
+        console.log("FAILED TO CONNECT WITH THE DATABASE!");
+        app.listen(3000);
+    })
 
 //register ejs as the view engine
 app.set('view engine', 'ejs');
@@ -25,14 +29,22 @@ app.get('/', (req, res) => {
 
 //Main page
 app.get('/recent', (req, res) => {
+
+    if(mongoose.connection.readyState != 1){
+        console.log("Displaying empty browse page, because connection with the database could not be estabilished!");
+        res.render('browse', {page: "home"});
+        return;
+    }
+
     Photo.find().sort({ createdAt: -1 })
-        .then((result) => {
-            res.render('index', {page: "home", photoList: result});
-        })
-        .catch((err) => {
-            console.log(err);
-            res.render('index', {page: "home"});
-        })
+    .then((result) => {
+        res.render('browse', {page: "home", photoList: result});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.render('browse', {page: "home"});
+    })
+
 });
 
 app.get('/about', (req, res) => {
@@ -49,6 +61,13 @@ app.get('/photo/add', (req, res) => {
 
 app.get('/photo/:id', (req, res) => {
     const id = req.params.id;
+    
+    if(mongoose.connection.readyState != 1){
+        console.log("ERROR: Cannot display photo details, because connection with the database could not be estabilished!");
+        res.render('500', {page: ""});
+        return;
+    }
+
     Photo.findById(id)
         .then((result) => {
             res.render('details', {page: "", photo: result});
@@ -65,6 +84,12 @@ app.get('/photo/:id', (req, res) => {
 
 app.delete('/photo/:id', (req, res) => {
     const id = req.params.id;
+
+    if(mongoose.connection.readyState != 1){
+        console.log("ERROR: Cannot delete, because connection with the database could not be estabilished!");
+        res.json({ redirect: `/photo/${id}` });
+    }
+
     console.log("Removing a photo from the database...");
     Photo.findByIdAndDelete(id)
         .then((result) => {
@@ -79,6 +104,12 @@ app.delete('/photo/:id', (req, res) => {
 
 app.put('/photo/:id', (req, res) => {
     const id = req.params.id;
+
+    if(mongoose.connection.readyState != 1){
+        console.log("ERROR: Cannot update the photo, because connection with the database could not be estabilished!");
+        res.json({ redirect: `/photo/${id}` });
+        return;
+    }
 
     console.log("Updating a photo...");
     console.log(req.body);
@@ -113,6 +144,13 @@ app.get('/photo/:id/editOld', (req, res) => {
 app.post('/photo', (req, res) => {
     console.log("Adding a new photo to the database...");
     console.log(req.body);
+
+    if(mongoose.connection.readyState != 1){
+        console.log("ERROR: Cannot save the photo, because connection with the database could not be estabilished!");
+        res.status(500).render('500', { page:"" });
+        return;
+    }
+    
     const newPhoto = new Photo(req.body);
 
     newPhoto.save()
