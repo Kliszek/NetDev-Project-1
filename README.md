@@ -8,15 +8,15 @@ It has some basic functionalities:
 * The user can upload his own photos to the database
 * It is possible to mark chosen photos as favourites and then filter them
 * It is possible to edit information on photos that were already uploaded
-* The site is fully responsive
+* The site is **fully responsive**
 * The site manages some basic exceptions like 404 and 500 errors.
 
 
 ### Technologies used
 
-* Node.js with Express
+* Node.js with Express (GET, POST, PUT, DELETE requests)
 * EJS (with partials)
-* Frontend JavaScript
+* Frontend JavaScript (with fetch API)
 * TailWindCSS
 * MongoDB database with mongoose
 
